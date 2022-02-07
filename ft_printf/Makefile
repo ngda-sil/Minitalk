@@ -1,4 +1,4 @@
-# **************************************************************************** #
+l# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -6,7 +6,7 @@
 #    By: ngda-sil <ngda-sil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/18 19:21:55 by ngda-sil          #+#    #+#              #
-#    Updated: 2022/01/13 15:44:30 by ngda-sil         ###   ########.fr        #
+#    Updated: 2022/02/07 20:24:55 by ngda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,28 +17,30 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS =  ft_printf.c \
-	ft_printchar.c \
-	ft_print_hex.c \
-	ft_printnbr.c \
-	ft_printstr.c \
-	ft_print_ptr.c \
-	ft_print_unsigned.c 
+		ft_print_hex.c \
+		ft_print_ptr.c \
+		ft_print_unsigned.c \
+		ft_printchar.c \
+		ft_printnbr.c \
+		ft_printstr.c \
 
-OBJS = $(SRCS:.c=.o)
+OBJS = ${SRCS:.c=.o}
+
+LIBFT = ./libft
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(MAKE) -C ./libft
-	cp libft/libft.a $(NAME)
+	$(MAKE) -C $(LIBFT)
+	cp ./libft/libft.a $(NAME)
 	ar rc $(NAME) $(OBJS) 
 
 clean:
-	$(MAKE) clean -C ./libft
+	$(MAKE) clean -C $(LIBFT)
 	rm -f ${OBJS} 
 
 fclean: clean
-	$(MAKE) fclean -C ./libft
+	$(MAKE) fclean -C $(LIBFT)
 	rm -f $(NAME)
 
 re: fclean all

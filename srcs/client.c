@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include <signal.h>
+#include "ft_printf/ft_printf.h"
 
 void	ft_send_msg(int pid, char *str)
 {
