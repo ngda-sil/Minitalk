@@ -11,7 +11,6 @@
 # **************************************************************************** #
 
 CC = gcc
-
 CFLAGS = -Wall -Wextra -Werror
 
 SRC_C = ./srcs/client.c
@@ -27,35 +26,43 @@ SRC_S_B = ./srcs_bonus/serveur_bonus.c
 OBJS_S_B = ${SRC_S_B:.c=.o}
 
 LIB = -lftprintf
-LIB_PATH = -I ./ft_printf -L lib
+LIB_PATH = -L./ft_printf/
 
 
 all: ftprintf client serveur
 
-ftprintf : 
-	$(MAKE) -C ./ft_printf
+
+ftprintf :
+	make -C ./ft_printf/
+
+
 
 client : $(OBJS_C)
-	 $(CC) $(CFLAGS) $(LIB) -o $@ $^ ./ft_printf/ft_printf.h$(LIB_PATH)
+	 $(CC) $(CFLAGS) $^ $(LIB_PATH) $(LIB) -o $@
+
 serveur : $(OBJS_S)
-	 $(CC) $(CFLAGS) $(LIB) -o $@ $^ $(LIB_PATH)	
+	 $(CC) $(CFLAGS) $^ $(LIB_PATH) $(LIB) -o $@
 
 
-bonus : client_bonus serveur_bonus ftprintf
+
+
+bonus : ftprintf client_bonus serveur_bonus
 
 client_bonus : $(OBJS_C_B)
-	$(CC) $(CFLAGS) $(LIB) -o $@ $^ $(LIB_PATH)
+	$(CC) $(CFLAGS) $^ $(LIB_PATH) $(LIB) -o $@
 
 serveur_bonus : $(OBJS_S_B)
-	 $(CC) $(CFLAGS) $(LIB) -o $@ $^ $(LIB_PATH)
+	$(CC) $(CFLAGS) $^ $(LIB_PATH) $(LIB) -o $@
+
+
 
 
 clean:
-	$(MAKE) clean -C /ft_printf
-	rm -f ${OBJS_C} ${OBJS_S} {OBJS_C_B} ${OBJS_S_B}
+	$(MAKE) clean -C ./ft_printf/
+	rm -f ${OBJS_C} ${OBJS_S} ${OBJS_C_B} ${OBJS_S_B}
 
 fclean: clean
-	$(MAKE) fclean -C ./ft_printf
+	$(MAKE) fclean -C ./ft_printf/
 	rm -f serveur client serveur_bonus client_bonus
 
 re: fclean all
