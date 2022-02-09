@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <signal.h>
-#include "../ft_printf/ft_printf.h"
+#include "ft_printf.h"
 
 void	ft_send(int pid, char *str)
 {
