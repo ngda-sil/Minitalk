@@ -42,9 +42,10 @@ serveur_bonus : ftprintf
 
 clean:
 	$(MAKE) clean -C ./ft_printf/
+
 fclean: clean
-	$(MAKE) fclean -C ./ft_printf/
 	rm -f serveur client serveur_bonus client_bonus
+
 re: fclean all
 
 .PHONY: all bonus clean fclean re
